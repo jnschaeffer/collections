@@ -34,4 +34,4 @@ view them. Run godoc like so:
 
 While godoc is running you can point your browser to the package documentation:
 
-[http://localhost:6060/pkg/github.com/jnschaeffer/collections](http://localhost:6060/pkg/github.com/jnschaeffer/collections).
+[http://localhost:6060/pkg/github.com/jnschaeffer/collections](http://localhost:6060/pkg/github.com/jnschaeffer/collections)

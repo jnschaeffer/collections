@@ -35,6 +35,10 @@ type Zipper interface {
 func ZipWithGaps(z Zipper) {
 	i, j := 0, 0
 	maxLeft, maxRight := z.LenLeft(), z.LenRight()
+	if maxLeft < 0 || maxRight < 0 {
+		panic(fmt.Sprintf("ZipWithGaps: negative lengths %d %d", maxLeft,
+			maxRight))
+	}
 	for i < maxLeft || j < maxRight {
 		switch {
 		case i >= maxLeft:

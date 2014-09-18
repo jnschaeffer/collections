@@ -14,6 +14,18 @@ type Sorter struct {
 	Sortable
 }
 
+func (s *Sorter) Len() int {
+	n := s.Sortable.Len()
+	if n < 0 {
+		panic("Len: negative length")
+	}
+
+	return n
+}
+
 func (s *Sorter) Less(i, j int) bool {
-	return s.Compare(i, j) == Less
+	o := s.Compare(i, j)
+	checkOrd("Less", o)
+
+	return o == Less
 }
