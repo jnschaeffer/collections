@@ -37,3 +37,8 @@ type Bounded interface {
 type Comparable interface {
 	Compare(i, j int) Ord
 }
+
+// Swappable represents any collction where two elements can be swapped.
+type Swappable interface {
+	Swap(i, j int)
+}
