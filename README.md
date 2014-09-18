@@ -15,7 +15,7 @@ Collections currently supports:
   * Shuffling: rearranging a collection in random order
 
 Most interfaces are built from smaller, composable interface types like
-`Bounded` (which implements `Len()`) and `Swappable` (which implements `Swap`).
+`Bounded` (which implements `Len`) and `Swappable` (which implements `Swap`).
 A strong focus is kept on compatibility with the Go standard library.
 
 Installation
@@ -32,5 +32,6 @@ view them. Run godoc like so:
 
     godoc -http=:6060
 
-While godoc is running you can point your browser to 
+While godoc is running you can point your browser to the package documentation:
+
 [http://localhost:6060/pkg/github.com/jnschaeffer/collections](http://localhost:6060/pkg/github.com/jnschaeffer/collections).
