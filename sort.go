@@ -5,6 +5,7 @@ package collections
 type Sortable interface {
 	Bounded
 	Comparable
+	Swappable
 }
 
 // Sorter is a wrapper around a Sortable which can be used directly in

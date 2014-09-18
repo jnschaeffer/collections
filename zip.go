@@ -27,12 +27,12 @@ type Zipper interface {
 	AddBoth(i, j int)
 }
 
-// Zip iterates through each element in the collection, comparing each leading
-// element in each collection exactly once. Any two elements that are equal
-// will be zipped together by AddBoth, otherwise the lesser element will be
-// added on its own. Assumes the left and right collections are in ascending
-// order when ordered by z.Compare.
-func Zip(z Zipper) {
+// ZipWithGaps iterates through each element in the collection, comparing each
+// leading element in each collection exactly once. Any two elements that are
+// equal will be zipped together by AddBoth, otherwise the lesser element will
+// be added on its own by AddLeft or AddRight. Assumes the left and right
+// collections are sorted in ascending order when ordered by z.Compare.
+func ZipWithGaps(z Zipper) {
 	i, j := 0, 0
 	maxLeft, maxRight := z.LenLeft(), z.LenRight()
 	for i < maxLeft || j < maxRight {
@@ -72,8 +72,9 @@ func (z *alwaysEqualZipper) Compare(i, j int) Ord {
 	return Equal
 }
 
-// ZipWithoutGaps zips both collections in the zipper together but assumes
-// elements are always equal.
-func ZipWithoutGaps(z Zipper) {
-	Zip(&alwaysEqualZipper{z})
+// Zip zips both collections in the zipper together assuming elements are
+// always equal. This is equivalent to ZipWithGaps where Zipper.Compare always
+// returns Equal.
+func Zip(z Zipper) {
+	ZipWithGaps(&alwaysEqualZipper{z})
 }
