@@ -14,6 +14,11 @@ type Sorter struct {
 	Sortable
 }
 
+// NewSorter creates a new Sorter containing the provided Sortable.
+func NewSorter(s Sortable) *Sorter {
+	return &Sorter{s}
+}
+
 func (s *Sorter) Len() int {
 	n := s.Sortable.Len()
 	if n < 0 {
