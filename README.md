@@ -1,5 +1,6 @@
 Introduction
 ============
+[![GoDoc](https://godoc.org/github.com/jnschaeffer/collections?status.svg)](https://godoc.org/github.com/jnschaeffer/collections)
 
 Collections 0.1 is a collection of utility types and functions for performing
 common operations on collections in Go.
