@@ -3,15 +3,21 @@
 // splitting them into smaller collections.
 package collections
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // An Ord represents a result of comparing two items.
 type Ord int
 
 const (
-	Less    Ord = 1 << iota // Less represents the idea of x < y.
-	Equal                   // Equal represents the idea of x == y.
-	Greater                 // Greater represents the idea of x > y.
+	// Less represents the idea of x < y.
+	Less Ord = 1 << iota
+	// Equal represents the idea of x == y.
+	Equal
+	// Greater represents the idea of x > y.
+	Greater
 )
 
 // checkOrd returns an error if the ord value is not Less, Equal, or Greater.
@@ -51,61 +57,62 @@ type Swappable interface {
 	Swap(i, j int)
 }
 
+// IntSlice is an alias for a slice of ints.
 type IntSlice []int
 
+// Len calculates the length of the underlying int slice.
 func (s IntSlice) Len() int { return len(s) }
+
+// Compare compares two ints in a slice, returning their ordering.
 func (s IntSlice) Compare(i, j int) Ord {
 	x, y := s[i], s[j]
-	var ord Ord
-	switch {
-	case x < y:
-		ord = Less
-	case x == y:
-		ord = Equal
-	case x > y:
-		ord = Greater
-	}
-
-	return ord
+	return CompareInts(x, y)
 }
+
+// Swap swaps two ints in a slice.
 func (s IntSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
+// FloatSlice is an alias for a slice of floats.
 type FloatSlice []float64
 
+// Len calculates the length of the underlying float slice.
 func (s FloatSlice) Len() int { return len(s) }
+
+// Compare compares two floats in a slice, returning their ordering.
 func (s FloatSlice) Compare(i, j int) Ord {
 	x, y := s[i], s[j]
-	var ord Ord
-	switch {
-	case x < y:
-		ord = Less
-	case x == y:
-		ord = Equal
-	case x > y:
-		ord = Greater
-	}
-
-	return ord
+	return CompareFloats(x, y)
 }
+
+// Swap swaps two floats in a slice.
 func (s FloatSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
+// StringSlice is an alias for a slice of strings.
 type StringSlice []string
 
+// Len calculates the length of the underlying string slice.
 func (s StringSlice) Len() int { return len(s) }
+
+// Compare compares two strings in a slice, returning their ordering.
 func (s StringSlice) Compare(i, j int) Ord {
 	x, y := s[i], s[j]
-	var ord Ord
-	switch {
-	case x < y:
-		ord = Less
-	case x == y:
-		ord = Equal
-	case x > y:
-		ord = Greater
-	}
-
-	return ord
+	return CompareStrings(x, y)
 }
+
+// Swap swaps two strings in a slice.
 func (s StringSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
-type ByteSlice []byte
+// TimeSlice is an alias for a slice of times.
+type TimeSlice []time.Time
+
+// Len calculates the length of the underlying time slice.
+func (s TimeSlice) Len() int { return len(s) }
+
+// Compare compares two times in a slice, returning their ordering.
+func (s TimeSlice) Compare(i, j int) Ord {
+	x, y := s[i], s[j]
+	return CompareTimes(x, y)
+}
+
+// Swap swaps two times in a slice.
+func (s TimeSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }

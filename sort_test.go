@@ -20,8 +20,8 @@ type nonsenseSorter struct {
 // INPUT: A slice of ints as an IntSlice wrapped by a Sorter.
 // EXPECTED: A sorted slice of ints.
 func TestSorter(t *testing.T) {
-	var ints IntSlice = []int{5, 1, 3, 4, 2}
-	s := &Sorter{ints}
+	ints := []int{5, 1, 3, 4, 2}
+	s := &Sorter{IntSlice(ints)}
 
 	sort.Sort(s)
 	if !sort.IsSorted(s) {

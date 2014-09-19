@@ -41,7 +41,7 @@ func TestCompareFloats(t *testing.T) {
 
 // INPUT: Two strings.
 // EXPECTED: Comparison results equivalent to <, =, and >.
-func TestCompareStringss(t *testing.T) {
+func TestCompareStrings(t *testing.T) {
 	lt := CompareStrings("a", "b")
 	eq := CompareStrings("b", "b")
 	gt := CompareStrings("b", "a")

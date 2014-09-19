@@ -19,6 +19,8 @@ func NewSorter(s Sortable) *Sorter {
 	return &Sorter{s}
 }
 
+// Len returns the length of the underlying Sortable. If the Sortable returns
+// a negative length, Len will panic.
 func (s *Sorter) Len() int {
 	n := s.Sortable.Len()
 	if n < 0 {
@@ -28,6 +30,8 @@ func (s *Sorter) Len() int {
 	return n
 }
 
+// Less returns the result of the underlying Sortable's compare operation. If
+// the Sortable returns an invalid Ord value, Less will panic.
 func (s *Sorter) Less(i, j int) bool {
 	o := s.Compare(i, j)
 	checkOrd("Less", o)

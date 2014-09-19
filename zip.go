@@ -43,22 +43,22 @@ func ZipWithGaps(z Zipper) {
 		switch {
 		case i >= maxLeft:
 			z.AddRight(j)
-			j += 1
+			j++
 		case j >= maxRight:
 			z.AddLeft(i)
-			i += 1
+			i++
 		default:
 			switch c := z.Compare(i, j); {
 			case c == Less:
 				z.AddLeft(i)
-				i += 1
+				i++
 			case c == Greater:
 				z.AddRight(j)
-				j += 1
+				j++
 			case c == Equal:
 				z.AddBoth(i, j)
-				i += 1
-				j += 1
+				i++
+				j++
 			default:
 				msg := fmt.Sprintf("Zip: compare returned %d: expected %s, "+
 					"%s, or %s", c, Less, Equal, Greater)

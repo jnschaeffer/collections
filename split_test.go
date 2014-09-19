@@ -24,7 +24,7 @@ type nonsenseSplitter struct {
 // INPUT: A slice of repeating ints.
 // EXPECTED: n slices of ints, each containing only the same value.
 func TestSplit(t *testing.T) {
-	var ints IntSlice = []int{1, 1, 1, 2, 2, 2, 3}
+	ints := []int{1, 1, 1, 2, 2, 2, 3}
 	splitter := NewIntSplitter(ints)
 
 	Split(splitter)

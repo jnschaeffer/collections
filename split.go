@@ -20,54 +20,66 @@ type IntSplitter struct {
 	Result []IntSlice
 }
 
+// NewIntSplitter initializes a new IntSplitter containing an IntSlice and an
+// empty result set.
 func NewIntSplitter(xs IntSlice) *IntSplitter {
 	return &IntSplitter{xs, []IntSlice{}}
 }
 
+// Split splits the int slice into slices of ints with equal value.
 func (s *IntSplitter) Split(i, j int) {
 	s.Result = append(s.Result, s.IntSlice[i:j])
 }
 
-// FloatSplitter represents a splitter over a list of ints.
+// FloatSplitter represents a splitter over a list of floats.
 type FloatSplitter struct {
 	Floats FloatSlice
 	Result []FloatSlice
 }
 
+// NewFloatSplitter initializes a new FloatSplitter containing a FloatSlice and
+// an empty result set.
 func NewFloatSplitter(xs FloatSlice) *FloatSplitter {
 	return &FloatSplitter{xs, []FloatSlice{}}
 }
 
+// Split splits the float slice into slices of floats with equal value.
 func (s *FloatSplitter) Split(i, j int) {
 	s.Result = append(s.Result, s.Floats[i:j])
 }
 
-// StringSplitter represents a splitter over a list of ints.
+// StringSplitter represents a splitter over a list of strings.
 type StringSplitter struct {
 	Strings StringSlice
 	Result  []StringSlice
 }
 
+// NewStringSplitter initializes a new StringSplitter containing a StringSlice
+// and an empty result set.
 func NewStringSplitter(xs StringSlice) *StringSplitter {
 	return &StringSplitter{xs, []StringSlice{}}
 }
 
+// Split splits the string slice into slices of strings with equal value.
 func (s *StringSplitter) Split(i, j int) {
 	s.Result = append(s.Result, s.Strings[i:j])
 }
 
-// ByteSplitter represents a splitter over a list of ints.
-type ByteSplitter struct {
-	Bytes  ByteSlice
-	Result []ByteSlice
+// TimeSplitter represents a splitter over a list of times.
+type TimeSplitter struct {
+	Times  TimeSlice
+	Result []TimeSlice
 }
 
-func NewByteSplitter(xs ByteSlice) *ByteSplitter {
-	return &ByteSplitter{xs, []ByteSlice{}}
+// NewTimeSplitter initializes a new TimeSplitter containing a TimeSlice and
+// an empty result set.
+func NewTimeSplitter(xs TimeSlice) *TimeSplitter {
+	return &TimeSplitter{xs, []TimeSlice{}}
 }
 
-func (s *ByteSplitter) Split(i, j int) {
-	s.Result = append(s.Result, s.Bytes[i:j])
+// Split splits the time slice into slices of times with equal value.
+func (s *TimeSplitter) Split(i, j int) {
+	s.Result = append(s.Result, s.Times[i:j])
 }
 
 // Split iterates over the entire collection in order, splitting it into groups
