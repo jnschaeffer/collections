@@ -28,11 +28,6 @@ your `$GOPATH`.
 Documentation
 =============
 
-All comments in Collections are godoc-friendly, so you can use godoc itself to
-view them. Run godoc like so:
+All documentation is available in godoc format.
 
-    godoc -http=:6060
-
-While godoc is running you can point your browser to the package documentation:
-
-[http://localhost:6060/pkg/github.com/jnschaeffer/collections](http://localhost:6060/pkg/github.com/jnschaeffer/collections)
+Documentation is also available at [https://godoc.org/github.com/jnschaeffer/collections](https://godoc.org/github.com/jnschaeffer/collections)

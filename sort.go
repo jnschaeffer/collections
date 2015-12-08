@@ -1,28 +1,29 @@
 package collections
 
-// Sortable represents a collection which can be used by the standard sort
-// package (with the Sorter wrapper).
-type Sortable interface {
+import "sort"
+
+// Sorter represents a collection that can be sorted.
+type Sorter interface {
 	Bounded
 	Comparable
 	Swappable
 }
 
-// Sorter is a wrapper around a Sortable which can be used directly in
+// stdlibSorter is a wrapper around a Sorter which can be used directly in
 // sort.Sort.
-type Sorter struct {
-	Sortable
+type stdlibSorter struct {
+	Sorter
 }
 
-// NewSorter creates a new Sorter containing the provided Sortable.
-func NewSorter(s Sortable) *Sorter {
-	return &Sorter{s}
+// newSorter creates a new stdlibSorter containing the provided Sorter.
+func newSorter(s Sorter) *stdlibSorter {
+	return &stdlibSorter{s}
 }
 
-// Len returns the length of the underlying Sortable. If the Sortable returns
+// Len returns the length of the underlying Sorter. If the Sorter returns
 // a negative length, Len will panic.
-func (s *Sorter) Len() int {
-	n := s.Sortable.Len()
+func (s *stdlibSorter) Len() int {
+	n := s.Sorter.Len()
 	if n < 0 {
 		panic("Len: negative length")
 	}
@@ -30,11 +31,21 @@ func (s *Sorter) Len() int {
 	return n
 }
 
-// Less returns the result of the underlying Sortable's compare operation. If
-// the Sortable returns an invalid Ord value, Less will panic.
-func (s *Sorter) Less(i, j int) bool {
+// Less returns the result of the underlying Sorter's compare operation. If
+// the Sorter returns an invalid Ord value, Less will panic.
+func (s *stdlibSorter) Less(i, j int) bool {
 	o := s.Compare(i, j)
 	checkOrd("Less", o)
 
 	return o == Less
+}
+
+// sort uses the Go stdlib sort to sort the items in this collection.
+func (s *stdlibSorter) sort() {
+	sort.Sort(s)
+}
+
+// Sort sorts the items in the collection using the standard Go sorting function.
+func Sort(s Sorter) {
+	newSorter(s).sort()
 }

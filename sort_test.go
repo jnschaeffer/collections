@@ -21,9 +21,11 @@ type nonsenseSorter struct {
 // EXPECTED: A sorted slice of ints.
 func TestSorter(t *testing.T) {
 	ints := []int{5, 1, 3, 4, 2}
-	s := &Sorter{IntSlice(ints)}
 
-	sort.Sort(s)
+	s := newSorter(IntSlice(ints))
+
+	s.sort()
+
 	if !sort.IsSorted(s) {
 		t.Errorf("bad sort: %#v is not sorted", ints)
 	}
@@ -32,29 +34,31 @@ func TestSorter(t *testing.T) {
 // INPUT: A sorter with negative length.
 // EXPECTED: A panic.
 func TestNegativeSorter(t *testing.T) {
-	n := negativeSorter{}
-	s := &Sorter{n}
-
 	defer func() {
 		if err := recover(); err == nil {
 			t.Fatalf("uncaught negative sorter length")
 		}
 	}()
 
-	sort.Sort(s)
+	n := negativeSorter{}
+
+	s := newSorter(n)
+
+	s.sort()
 }
 
 // INPUT: A sorter with nonsense comparison results.
 // EXPECTED: A panic.
 func TestNonsenseSorterCompare(t *testing.T) {
-	n := nonsenseSorter{}
-	s := &Sorter{n}
-
 	defer func() {
 		if err := recover(); err == nil {
 			t.Fatalf("uncaught nonsense compare result")
 		}
 	}()
 
-	sort.Sort(s)
+	n := nonsenseSorter{}
+
+	s := newSorter(n)
+
+	s.sort()
 }
