@@ -9,6 +9,33 @@ type Sorter interface {
 	Swappable
 }
 
+// reverseSorter is a wrapper around a Sorter that will always return results
+// in reverse order.
+type reverseSorter struct {
+	Sorter
+}
+
+func (r reverseSorter) Compare(i, j int) Ord {
+	o := r.Sorter.Compare(i, j)
+	switch o {
+	case Less:
+		return Greater
+	case Greater:
+		return Less
+	default:
+		return o
+	}
+}
+
+// Reverse creates a Sorter that will produce results in reverse order from
+// the sorter passed in.
+func Reverse(s Sorter) Sorter {
+	return reverseSorter{
+		Sorter: s,
+	}
+
+}
+
 // stdlibSorter is a wrapper around a Sorter which can be used directly in
 // sort.Sort.
 type stdlibSorter struct {
